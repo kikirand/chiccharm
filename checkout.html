@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — ChicCharm</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="topbar">Free shipping on orders above ₹1999 · Easy 7-day returns</div>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">Chic<span>Charm</span></a>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop All</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <span data-auth-slot></span>
+      <a href="cart.html">🛍️ Cart <span class="cart-badge" data-cart-count style="display:none">0</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="page-header"><h1>Checkout</h1></div>
+
+<div class="section" id="checkout-section" style="display:none;">
+  <div class="checkout-layout">
+    <div>
+      <h3>Shipping Address</h3>
+      <form id="checkout-form">
+        <div class="field"><label>Full Name</label><input type="text" id="c-name" required></div>
+        <div class="field"><label>Phone Number</label><input type="tel" id="c-phone" pattern="[0-9]{10}" placeholder="10-digit number" required></div>
+        <div class="field"><label>Address</label><textarea id="c-address" rows="2" required></textarea></div>
+        <div class="field-row">
+          <div class="field"><label>City</label><input type="text" id="c-city" required></div>
+          <div class="field"><label>PIN Code</label><input type="text" id="c-pin" pattern="[0-9]{6}" required></div>
+        </div>
+
+        <h3 style="margin-top:30px;">Payment Method (Demo)</h3>
+        <div class="pay-methods">
+          <div class="pay-method selected" data-method="card">Credit / Debit Card</div>
+          <div class="pay-method" data-method="upi">UPI</div>
+          <div class="pay-method" data-method="cod">Cash on Delivery</div>
+        </div>
+
+        <div id="card-fields">
+          <div class="field"><label>Card Number</label><input type="text" id="c-card" placeholder="4242 4242 4242 4242" maxlength="19"></div>
+          <div class="field-row">
+            <div class="field"><label>Expiry (MM/YY)</label><input type="text" id="c-exp" placeholder="MM/YY" maxlength="5"></div>
+            <div class="field"><label>CVV</label><input type="text" id="c-cvv" placeholder="123" maxlength="3"></div>
+          </div>
+        </div>
+        <div id="upi-fields" style="display:none;">
+          <div class="field"><label>UPI ID</label><input type="text" id="c-upi" placeholder="yourname@upi"></div>
+        </div>
+
+        <p class="demo-note">This is a mock checkout for a college project — no real payment is processed and no real card details should be entered.</p>
+        <p class="form-error" id="checkout-error"></p>
+        <button type="submit" class="btn btn-block" style="margin-top:18px;">Place Order</button>
+      </form>
+    </div>
+
+    <div class="cart-summary">
+      <h3>Order Summary</h3>
+      <div id="order-lines"></div>
+      <div class="summary-row"><span>Subtotal</span><span id="co-subtotal"></span></div>
+      <div class="summary-row"><span>Shipping</span><span id="co-shipping"></span></div>
+      <div class="summary-row total"><span>Total</span><span id="co-total"></span></div>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div><div class="logo" style="color:#fff">Chic<span>Charm</span></div></div>
+    <div><h5>Shop</h5><ul><li><a href="shop.html">Shop All</a></li></ul></div>
+    <div><h5>Help</h5><ul><li><a href="contact.html">Contact Us</a></li></ul></div>
+    <div><h5>Account</h5><ul><li><a href="orders.html">My Orders</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">© 2026 ChicCharm. A student e-commerce project — built for demo purposes only.</div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/db.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/orders.js"></script>
+<script src="js/main.js"></script>
+<script>
+  if (requireLogin()) {
+    const lines = getCartWithDetails();
+    if (lines.length === 0) {
+      window.location.href = "cart.html";
+    } else {
+      document.getElementById("checkout-section").style.display = "block";
+
+      document.getElementById("order-lines").innerHTML = lines.map(l => `
+        <div class="order-line"><span>${l.product.name} (${l.size}) × ${l.qty}</span><span>${formatPrice(l.product.price * l.qty)}</span></div>
+      `).join("");
+      const totals = getCartTotals();
+      document.getElementById("co-subtotal").textContent = formatPrice(totals.subtotal);
+      document.getElementById("co-shipping").textContent = totals.shipping === 0 ? "Free" : formatPrice(totals.shipping);
+      document.getElementById("co-total").textContent = formatPrice(totals.total);
+
+      let method = "card";
+      document.querySelectorAll(".pay-method").forEach(el => el.addEventListener("click", () => {
+        document.querySelectorAll(".pay-method").forEach(e2 => e2.classList.remove("selected"));
+        el.classList.add("selected");
+        method = el.dataset.method;
+        document.getElementById("card-fields").style.display = method === "card" ? "block" : "none";
+        document.getElementById("upi-fields").style.display = method === "upi" ? "block" : "none";
+      }));
+
+      document.getElementById("checkout-form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const errEl = document.getElementById("checkout-error");
+        errEl.style.display = "none";
+
+        if (method === "card") {
+          const cardNum = document.getElementById("c-card").value.replace(/\s/g, "");
+          const exp = document.getElementById("c-exp").value;
+          const cvv = document.getElementById("c-cvv").value;
+          if (cardNum.length < 12 || !exp.includes("/") || cvv.length < 3) {
+            errEl.textContent = "Please enter valid (demo) card details.";
+            errEl.style.display = "block";
+            return;
+          }
+        }
+        if (method === "upi" && !document.getElementById("c-upi").value.includes("@")) {
+          errEl.textContent = "Please enter a valid UPI ID (e.g. name@upi).";
+          errEl.style.display = "block";
+          return;
+        }
+
+        const address = {
+          name: document.getElementById("c-name").value,
+          phone: document.getElementById("c-phone").value,
+          line: document.getElementById("c-address").value,
+          city: document.getElementById("c-city").value,
+          pin: document.getElementById("c-pin").value
+        };
+
+        const order = placeOrder(address, method.toUpperCase());
+        if (order) {
+          sessionStorage.setItem("cc_last_order", order.id);
+          window.location.href = "order-confirmation.html";
+        }
+      });
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — ChicCharm</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="top-bar">Free shipping on orders over ₹2000 · Easy 15-day returns</div>
+
+<header class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Chic<span>Charm</span></a>
+    <nav>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <a href="login.html" class="account-link" id="account-link">Login</a>
+      <a href="#" class="account-link" id="logout-link" style="display:none;">Logout</a>
+      <a href="cart.html" class="cart-link">🛍 Bag <span class="cart-badge" id="cart-count">0</span></a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="page-header">
+    <p class="breadcrumbs"><a href="index.html">Home</a> / Contact</p>
+    <h1>Get in Touch</h1>
+  </div>
+
+  <section class="contact-layout">
+    <div>
+      <div class="contact-info-card">
+        <span class="contact-info-icon">📍</span>
+        <div>
+          <h4>Studio Address</h4>
+          <p>4th Floor, Textile Lane, Model Town<br>Batala, Punjab 143505, India</p>
+        </div>
+      </div>
+      <div class="contact-info-card">
+        <span class="contact-info-icon">✉️</span>
+        <div>
+          <h4>Email</h4>
+          <p>hello@chiccharm.example</p>
+        </div>
+      </div>
+      <div class="contact-info-card">
+        <span class="contact-info-icon">📞</span>
+        <div>
+          <h4>Phone</h4>
+          <p>+91 12345 67890 (Mon–Sat, 10am–7pm)</p>
+        </div>
+      </div>
+      <div class="map-placeholder">Map placeholder — plug in Google Maps embed here</div>
+    </div>
+
+    <div>
+      <form id="contact-form">
+        <div class="form-field">
+          <label for="contact-name">Full Name</label>
+          <input type="text" id="contact-name" required>
+        </div>
+        <div class="form-field">
+          <label for="contact-email">Email Address</label>
+          <input type="email" id="contact-email" required>
+        </div>
+        <div class="form-field">
+          <label for="contact-topic">Topic</label>
+          <select id="contact-topic">
+            <option>Order Support</option>
+            <option>Sizing Help</option>
+            <option>Returns &amp; Exchanges</option>
+            <option>Wholesale Enquiry</option>
+            <option>Something Else</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="contact-message">Message</label>
+          <textarea id="contact-message" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+        <p class="form-msg" id="contact-status"></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="section bg-alt" id="faq">
+    <div class="section-heading" style="max-width:800px;margin-left:auto;margin-right:auto;">
+      <h2>Frequently Asked Questions</h2>
+      <p>Can't find your answer? Send us a message above.</p>
+    </div>
+    <div class="faq-section">
+      <div class="faq-item">
+        <div class="faq-question">How long does delivery take?</div>
+        <div class="faq-answer">Orders are dispatched within 2 business days and typically arrive within 4–7 business days, depending on your location.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">What is your return policy?</div>
+        <div class="faq-answer">You can return or exchange any unworn item with tags attached within 15 days of delivery for a full refund or store credit.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Do you offer Cash on Delivery?</div>
+        <div class="faq-answer">Yes, Cash on Delivery is available on all orders under ₹5,000 across serviceable pin codes.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">How do I know which size to order?</div>
+        <div class="faq-answer">Each product page includes a size guide with body measurements. If you're between sizes, we generally recommend sizing up.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Do you ship internationally?</div>
+        <div class="faq-answer">Not yet — we currently ship across India only, but international shipping is on our roadmap.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">Chic<span>Charm</span></div>
+      <p>Everyday and occasion wear for women, designed to be worn on repeat — not just photographed once.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="shop.html?category=Dresses">Dresses</a></li>
+        <li><a href="shop.html?category=Ethnic">Ethnic Wear</a></li>
+        <li><a href="shop.html?category=Tops">Tops</a></li>
+        <li><a href="shop.html">All Products</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="contact.html#faq">FAQs</a></li>
+        <li><a href="orders.html">My Orders</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Get in Touch</h4>
+      <ul>
+        <li>hello@chiccharm.example</li>
+        <li>+91 12345 67890</li>
+        <li>Mon–Sat, 10am–7pm</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 ChicCharm. A student/demo project — not a live store.</span>
+    <span>Built with HTML, CSS &amp; JavaScript</span>
+  </div>
+</footer>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>

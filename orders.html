@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Orders — ChicCharm</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="top-bar">Free shipping on orders over ₹2000 · Easy 15-day returns</div>
+
+<header class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Chic<span>Charm</span></a>
+    <nav>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <a href="login.html" class="account-link" id="account-link">Login</a>
+      <a href="#" class="account-link" id="logout-link" style="display:none;">Logout</a>
+      <a href="cart.html" class="cart-link">🛍 Bag <span class="cart-badge" id="cart-count">0</span></a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="page-header">
+    <p class="breadcrumbs"><a href="index.html">Home</a> / Your Orders</p>
+    <h1>Your Orders</h1>
+  </div>
+
+  <div class="orders-wrap">
+    <div id="orders-list"></div>
+    <div class="orders-empty" id="orders-empty" style="display:none;">
+      <p>You haven't placed any orders yet.</p>
+      <a href="shop.html">Start shopping →</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">Chic<span>Charm</span></div>
+      <p>Everyday and occasion wear for women, designed to be worn on repeat — not just photographed once.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="shop.html?category=Dresses">Dresses</a></li>
+        <li><a href="shop.html?category=Ethnic">Ethnic Wear</a></li>
+        <li><a href="shop.html?category=Tops">Tops</a></li>
+        <li><a href="shop.html">All Products</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="contact.html#faq">FAQs</a></li>
+        <li><a href="orders.html">My Orders</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Get in Touch</h4>
+      <ul>
+        <li>hello@chiccharm.example</li>
+        <li>+91 98765 43210</li>
+        <li>Mon–Sat, 10am–7pm</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 ChicCharm. A student/demo project — not a live store.</span>
+    <span>Built with HTML, CSS &amp; JavaScript</span>
+  </div>
+</footer>
+
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/script.js"></script>
+<script src="js/orders.js"></script>
+</body>
+</html>

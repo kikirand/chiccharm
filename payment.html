@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — ChicCharm</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+
+<div class="top-bar">This is a demo payment page — no real charges are made</div>
+
+<header class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Chic<span>Charm</span></a>
+    <nav>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <a href="login.html" class="account-link" id="account-link">Login</a>
+      <a href="#" class="account-link" id="logout-link" style="display:none;">Logout</a>
+      <a href="cart.html" class="cart-link">🛍 Bag <span class="cart-badge" id="cart-count">0</span></a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="page-header">
+    <p class="breadcrumbs"><a href="index.html">Home</a> / <a href="cart.html">Bag</a> / Checkout</p>
+    <h1>Checkout</h1>
+  </div>
+
+  <div class="checkout-layout">
+
+    <div class="checkout-main">
+
+      <!-- STEP 1: DELIVERY ADDRESS -->
+      <section class="checkout-card address-section">
+
+        <div class="checkout-section-heading">
+          <span class="checkout-step">01</span>
+          <div>
+            <h2>Select Delivery Address</h2>
+            <p>Select where you'd like your order delivered.</p>
+          </div>
+        </div>
+
+        <!-- Saved addresses are rendered here by address.js -->
+        <div id="address-list">
+          <p class="checkout-loading">Loading saved addresses...</p>
+        </div>
+
+        <hr class="address-divider">
+
+        <h3>Add New Address</h3>
+
+        <form id="address-form" class="address-form">
+
+          <div class="form-field">
+            <label for="addr-name">Full name</label>
+            <input type="text" id="addr-name" autocomplete="name" required>
+          </div>
+
+          <div class="form-field">
+            <label for="addr-street">Street address / Flat no.</label>
+            <input type="text" id="addr-street" autocomplete="address-line1" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="addr-city">City</label>
+              <input type="text" id="addr-city" autocomplete="address-level2" required>
+            </div>
+            <div class="form-field">
+              <label for="addr-state">State</label>
+              <input type="text" id="addr-state" autocomplete="address-level1" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="addr-pincode">Pincode</label>
+              <input type="text" id="addr-pincode" inputmode="numeric" autocomplete="postal-code" required>
+            </div>
+            <div class="form-field">
+              <label for="addr-phone">Phone number</label>
+              <input type="text" id="addr-phone" inputmode="tel" autocomplete="tel" required>
+            </div>
+          </div>
+
+          <label class="default-address">
+            <input type="checkbox" id="addr-default"> Make this my default address
+          </label>
+
+          <button type="submit" class="btn btn-outline save-address-btn">Save Address</button>
+        </form>
+
+      </section>
+
+
+      <!-- STEP 2: PAYMENT -->
+      <section class="checkout-card payment-form-panel" id="payment-form-panel">
+
+        <div class="checkout-section-heading">
+          <span class="checkout-step">02</span>
+          <div>
+            <h2>Payment Method</h2>
+            <p>Choose how you'd like to complete your order.</p>
+          </div>
+        </div>
+
+        <div class="payment-methods" role="radiogroup" aria-label="Payment method">
+          <label class="payment-method">
+            <input type="radio" name="payment_method" value="card" checked>
+            <span>💳 Credit / Debit Card</span>
+          </label>
+
+          <label class="payment-method">
+            <input type="radio" name="payment_method" value="upi">
+            <span>📱 UPI</span>
+          </label>
+
+          <label class="payment-method">
+            <input type="radio" name="payment_method" value="cod">
+            <span>💵 Cash on Delivery</span>
+          </label>
+        </div>
+
+        <!-- CARD DETAILS -->
+        <div id="card-payment-section" class="payment-details">
+          <h3>Card Details</h3>
+
+          <div class="form-field">
+            <label for="card-number">Card Number</label>
+            <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" inputmode="numeric" autocomplete="cc-number">
+          </div>
+
+          <div class="card-row">
+            <div class="form-field">
+              <label for="card-expiry">Expiry</label>
+              <input type="text" id="card-expiry" placeholder="MM / YY" maxlength="7" inputmode="numeric" autocomplete="cc-exp">
+            </div>
+            <div class="form-field">
+              <label for="card-cvv">CVV</label>
+              <input type="password" id="card-cvv" placeholder="123" maxlength="4" inputmode="numeric" autocomplete="cc-csc">
+            </div>
+          </div>
+        </div>
+
+        <!-- UPI DETAILS -->
+        <div id="upi-payment-section" class="payment-details" style="display:none;">
+          <h3>UPI Payment</h3>
+
+          <div class="form-field">
+            <label for="upi-id">UPI ID</label>
+            <input type="text" id="upi-id" placeholder="example@upi">
+          </div>
+
+          <p class="payment-note">Demo only — no real UPI payment will be processed.</p>
+        </div>
+
+        <!-- COD DETAILS -->
+        <div id="cod-payment-section" class="payment-details" style="display:none;">
+          <h3>Cash on Delivery</h3>
+          <p>Pay for your order when it is delivered to your address.</p>
+          <p class="payment-note">This is a demonstration checkout. No actual payment will be collected.</p>
+        </div>
+
+        <p id="payment-error" class="form-error" role="alert"></p>
+
+        <button type="button" id="pay-btn" class="btn btn-primary btn-block" onclick="handleOrderCheckout(event)">
+          Pay Now
+        </button>
+
+      </section>
+
+    </div>
+
+    <div class="payment-success" id="payment-success">
+      <div class="payment-success-icon">✓</div>
+      <h2>Order Confirmed</h2>
+      <p>Order <strong id="success-order-id"></strong> for <strong id="success-order-total"></strong> has been placed. A confirmation email would normally be sent here.</p>
+      <div class="payment-success-actions">
+        <a href="orders.html" class="btn btn-primary">View My Orders</a>
+        <a href="shop.html" class="btn btn-outline">Continue Shopping</a>
+      </div>
+    </div>
+
+    <aside class="payment-summary-box">
+      <h3>Order Summary</h3>
+      <div id="payment-items"></div>
+      <div class="summary-row"><span>Subtotal</span><span id="payment-subtotal">₹0</span></div>
+      <div class="summary-row"><span>Shipping</span><span id="payment-shipping">Free</span></div>
+      <div class="summary-row total"><span>Total</span><span id="payment-total">₹0</span></div>
+    </aside>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">Chic<span>Charm</span></div>
+      <p>Everyday and occasion wear for women, designed to be worn on repeat — not just photographed once.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="shop.html?category=Dresses">Dresses</a></li>
+        <li><a href="shop.html?category=Ethnic">Ethnic Wear</a></li>
+        <li><a href="shop.html?category=Tops">Tops</a></li>
+        <li><a href="shop.html">All Products</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="contact.html#faq">FAQs</a></li>
+        <li><a href="orders.html">My Orders</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Get in Touch</h4>
+      <ul>
+        <li>hello@chiccharm.example</li>
+        <li>+91 98765 43210</li>
+        <li>Mon–Sat, 10am–7pm</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 ChicCharm. A student/demo project — not a live store.</span>
+    <span>Built with HTML, CSS &amp; JavaScript</span>
+  </div>
+</footer>
+
+<script src="/js/products.js"></script>
+<script src="/js/cart.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/script.js"></script>
+
+<script src="/js/address.js"></script>
+<script src="/js/payment.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+# Node
+node_modules/
+
+# Environment variables
+.env
+.env.*
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Build/cache
+dist/
+build/
+
+# Local database dumps
+*.sql.bak

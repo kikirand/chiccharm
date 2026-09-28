@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Confirmed — ChicCharm</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">Chic<span>Charm</span></a>
+    <span></span>
+    <span></span>
+  </div>
+</header>
+
+<div class="section" style="max-width:640px; text-align:center; padding-top:80px;" id="confirm-section">
+  <div style="font-size:3rem;">🎉</div>
+  <h1>Thank you! Your order is confirmed.</h1>
+  <p id="confirm-text" style="color:#54463f; margin-bottom:26px;"></p>
+  <div class="form-card" style="text-align:left; max-width:520px;" id="order-recap"></div>
+  <div style="margin-top:26px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+    <a href="orders.html" class="btn">View My Orders</a>
+    <a href="shop.html" class="btn btn-outline">Continue Shopping</a>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-bottom">© 2026 ChicCharm. A student e-commerce project — built for demo purposes only.</div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/db.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/orders.js"></script>
+<script src="js/main.js"></script>
+<script>
+  const orderId = sessionStorage.getItem("cc_last_order");
+  const order = dbGetOrders().find(o => o.id === orderId);
+  if (!order) {
+    document.getElementById("confirm-section").innerHTML = "<h1>No recent order found</h1><a class='btn' href='shop.html'>Go to Shop</a>";
+  } else {
+    document.getElementById("confirm-text").textContent = `Order ${order.id} has been placed and is now ${order.status.toLowerCase()}. A confirmation would normally be emailed to you.`;
+    document.getElementById("order-recap").innerHTML = `
+      <p><strong>Order ID:</strong> ${order.id}</p>
+      <p><strong>Date:</strong> ${formatDate(order.date)}</p>
+      <p><strong>Payment:</strong> ${order.payment}</p>
+      <p><strong>Delivering to:</strong> ${order.address.name}, ${order.address.line}, ${order.address.city} - ${order.address.pin}</p>
+      <p><strong>Total Paid:</strong> ${formatPrice(order.total)}</p>
+    `;
+  }
+</script>
+</body>
+</html>
